@@ -1,6 +1,7 @@
 #!/bin/bash
 
-MODEL="iaa01/llama-8b-merge-alpha05-freq10"
+#MODEL="iaa01/llama-8b-merge-alpha05-freq10"
+MODEL="meta-llama/Llama-3.1-8B-Instruct"
 TASK="custom|aime24|0|0"
 SEED=0
 TEMP=0.8
