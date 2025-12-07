@@ -18,5 +18,6 @@ python main.py \
     --output_dir $OUTPUT_DIR \
     --max_new_tokens $MAX_TOKENS \
     --max_model_length $MAX_MODEL_LENGTH \
-    --custom_tasks_directory lighteval_tasks.py
+    --custom_tasks_directory lighteval_tasks.py \
+    --use_chat_template
 
