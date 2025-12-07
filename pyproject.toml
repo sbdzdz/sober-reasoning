@@ -6,24 +6,28 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "datasets>=2.18.0,<3.0.0",
-    "flash-attn==2.7.4.post1",
+    "flash-attn==2.7.4.post1; sys_platform == 'linux'",
     "lighteval[math]==0.8.1",
-    "torch==2.5.1+cu121",
-    "torchaudio==2.5.1+cu121",
-    "torchvision==0.20.1+cu121",
-    "vllm>=0.7.3",
+    "torch==2.5.1+cu121; sys_platform == 'linux'",
+    "torch>=2.5.1; sys_platform != 'linux'",
+    "torchaudio==2.5.1+cu121; sys_platform == 'linux'",
+    "torchaudio>=2.5.1; sys_platform != 'linux'",
+    "torchvision==0.20.1+cu121; sys_platform == 'linux'",
+    "torchvision>=0.20.1; sys_platform != 'linux'",
+    "vllm>=0.7.3; sys_platform == 'linux'",
 ]
 
-[tool.uv]
-environments = ["sys_platform == 'linux'"]
-index-strategy = "unsafe-best-match"
+[[tool.uv.index]]
+name = "pytorch-cu121"
+url = "https://download.pytorch.org/whl/cu121"
 
 [[tool.uv.index]]
-url = "https://download.pytorch.org/whl/cu121"
+name = "pypi"
+url = "https://pypi.org/simple"
 default = true
 
 [tool.uv.sources]
 flash-attn = { url = "https://github.com/Dao-AILab/flash-attention/releases/download/v2.7.4.post1/flash_attn-2.7.4.post1+cu12torch2.5cxx11abiFALSE-cp312-cp312-linux_x86_64.whl" }
-
-[[tool.uv.index]]
-url = "https://pypi.org/simple"
+torch = { index = "pytorch-cu121", marker = "sys_platform == 'linux'" }
+torchaudio = { index = "pytorch-cu121", marker = "sys_platform == 'linux'" }
+torchvision = { index = "pytorch-cu121", marker = "sys_platform == 'linux'" }
