@@ -1,7 +1,7 @@
 #!/bin/bash
 
 MODEL="iaa01/llama-8b-merge-alpha05-freq10"
-TASK="custom|math_500|0|0"
+TASK="custom|aime24|0|0"
 SEED=0
 TEMP=0.8
 TOP_P=0.9
