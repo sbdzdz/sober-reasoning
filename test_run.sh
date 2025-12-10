@@ -3,7 +3,7 @@
 MODEL="iaa01/llama-8b-merge-alpha05-freq10"
 #MODEL="meta-llama/Llama-3.1-8B-Instruct"
 #TASK="custom|aime24|0|0"  # 5-shot evaluation
-TASK="custom|math_500|5|0"  # 5-shot evaluation
+TASK="custom|math_500|0|0"  # 5-shot evaluation
 SEED=0
 TEMP=0.8
 TOP_P=0.9
