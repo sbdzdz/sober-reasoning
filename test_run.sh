@@ -6,8 +6,8 @@ TASK="custom|math_500|0|0"  # 5-shot evaluation
 SEED=0
 TEMP=0.8
 TOP_P=0.9
-MAX_TOKENS=16384
-MAX_MODEL_LENGTH=32768
+MAX_TOKENS=1024
+MAX_MODEL_LENGTH=2048
 OUTPUT_DIR="./test_output"
 
 python main.py \
