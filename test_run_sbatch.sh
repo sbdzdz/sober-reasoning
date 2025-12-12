@@ -35,7 +35,7 @@ set -x
 
 python main.py \
     --model $MODEL \
-    --task $TASK \
+    --task "$TASK" \
     --temperature $TEMP \
     --top_p $TOP_P \
     --seed $SEED \
