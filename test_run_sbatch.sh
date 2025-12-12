@@ -11,7 +11,7 @@ TASK="custom|math_500_base|0|0"
 SEED=0
 TEMP=0.8
 TOP_P=0.9
-MAX_TOKENS=16384
+MAX_TOKENS=8192
 MAX_MODEL_LENGTH=16384
 
 echo "Submitting test job: $MODEL, $TASK"
@@ -21,7 +21,7 @@ sbatch <<EOT
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=8
 #SBATCH --nodes=1
-#SBATCH --time=1:00:00
+#SBATCH --time=3:00:00
 #SBATCH --gres=gpu:1
 #SBATCH --mem=100G
 #SBATCH --output=$OUTPUT_DIR/logs/%j.out
