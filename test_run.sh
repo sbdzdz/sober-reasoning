@@ -6,8 +6,8 @@ TASK="custom|math_500_base|0|0"  # base model prompt (completion-style)
 SEED=0
 TEMP=0.8
 TOP_P=0.9
-MAX_TOKENS=1024
-MAX_MODEL_LENGTH=2048
+MAX_TOKENS=16384
+MAX_MODEL_LENGTH=16384
 OUTPUT_DIR="./test_output"
 
 python main.py \
