@@ -7,7 +7,7 @@ VENV="/weka/bethge/dziadzio08/sober-reasoning/.venv/bin/activate"
 mkdir -p $OUTPUT_DIR/logs
 
 MODEL="meta-llama/Llama-3.1-8B"
-TASK="custom|math_500_base|0|0"
+TASK="custom|math_500_base_4shot|0|0"
 SEED=0
 TEMP=0.8
 TOP_P=0.9
