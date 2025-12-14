@@ -2,7 +2,7 @@
 
 #MODEL="iaa01/llama-8b-merge-alpha05-freq10"
 MODEL="meta-llama/Llama-3.1-8B"
-TASK="custom|math_500_base|0|0"  # base model prompt (completion-style)
+TASK="custom|math_500_base_zeroshot|0|0"  # base model prompt (completion-style)
 SEED=0
 TEMP=0.8
 TOP_P=0.9
