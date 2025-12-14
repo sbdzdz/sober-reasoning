@@ -37,7 +37,7 @@ Solve the following math problem efficiently and clearly.  The last line of your
 {Question}
 """.strip()
 
-MATH_BASE_TEMPLATE = """Problem:
+MATH_BASE_4SHOT_TEMPLATE = """Problem:
 Find the domain of the expression $\\frac{{\\sqrt{{x-2}}}}{{\\sqrt{{5-x}}}}$.
 
 Solution:
@@ -78,6 +78,10 @@ Problem:
 {Question}
 
 Solution: Let's think step by step.""".strip()
+
+MATH_BASE_ZEROSHOT_TEMPLATE = """Problem: {Question}
+
+Solution: Let's think step by step. The final answer should be in $\\boxed{{answer}}$ format.""".strip()
 
 # Prompt template from simple-evals: https://github.com/openai/simple-evals/blob/83ed7640a7d9cd26849bcb3340125002ef14abbe/common.py#L14
 GPQA_QUERY_TEMPLATE = """
@@ -138,10 +142,19 @@ def math_prompt_fn(line, task_name: str = None):
     )
 
 
-def math_base_prompt_fn(line, task_name: str = None):
+def math_base_4shot_prompt_fn(line, task_name: str = None):
     return Doc(
         task_name=task_name,
-        query=MATH_BASE_TEMPLATE.format(Question=line["problem"]),
+        query=MATH_BASE_4SHOT_TEMPLATE.format(Question=line["problem"]),
+        choices=[line["solution"]],
+        gold_index=0,
+    )
+
+
+def math_base_zeroshot_prompt_fn(line, task_name: str = None):
+    return Doc(
+        task_name=task_name,
+        query=MATH_BASE_ZEROSHOT_TEMPLATE.format(Question=line["problem"]),
         choices=[line["solution"]],
         gold_index=0,
     )
@@ -250,10 +263,24 @@ math_500 = LightevalTaskConfig(
     metric=[latex_gold_metric],
     version=1,
 )
-math_500_base = LightevalTaskConfig(
-    name="math_500_base",
+math_500_base_4shot = LightevalTaskConfig(
+    name="math_500_base_4shot",
     suite=["custom"],
-    prompt_function=math_base_prompt_fn,
+    prompt_function=math_base_4shot_prompt_fn,
+    hf_repo="HuggingFaceH4/MATH-500",
+    hf_subset="default",
+    hf_avail_splits=["test"],
+    evaluation_splits=["test"],
+    few_shots_split=None,
+    few_shots_select=None,
+    generation_size=32768,
+    metric=[latex_gold_metric],
+    version=1,
+)
+math_500_base_zeroshot = LightevalTaskConfig(
+    name="math_500_base_zeroshot",
+    suite=["custom"],
+    prompt_function=math_base_zeroshot_prompt_fn,
     hf_repo="HuggingFaceH4/MATH-500",
     hf_subset="default",
     hf_avail_splits=["test"],
@@ -328,7 +355,8 @@ TASKS_TABLE = []
 TASKS_TABLE.append(aime24)
 TASKS_TABLE.append(aime25)
 TASKS_TABLE.append(math_500)
-TASKS_TABLE.append(math_500_base)
+TASKS_TABLE.append(math_500_base_4shot)
+TASKS_TABLE.append(math_500_base_zeroshot)
 TASKS_TABLE.append(gpqa_diamond)
 TASKS_TABLE.append(minerva)
 TASKS_TABLE.append(amc23)
