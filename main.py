@@ -38,6 +38,12 @@ def parse_args():
     parser.add_argument("--system_prompt", type=str, default=None)
     parser.add_argument("--custom_tasks_directory", type=str, default=None)
     parser.add_argument("--use_chat_template", action="store_true")
+    parser.add_argument(
+        "--max_samples",
+        type=int,
+        default=None,
+        help="Max samples per task (for quick experiments)",
+    )
     parser.add_argument("--overwrite", action="store_true")
     parser.add_argument("--launcher_type", type=str, default="VLLM")
     return parser.parse_args()
@@ -91,7 +97,7 @@ def main():
         custom_tasks_directory=args.custom_tasks_directory,
         override_batch_size=-1,  # Cannot override batch size when using VLLM
         num_fewshot_seeds=1,
-        max_samples=None,
+        max_samples=args.max_samples,
         use_chat_template=args.use_chat_template,
         system_prompt=system_prompt,
         load_responses_from_details_date_id=None,
